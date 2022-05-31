@@ -1,11 +1,18 @@
-plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'java'
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+dependencies{
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
+    }
 }
 
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
