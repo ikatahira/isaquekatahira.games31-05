@@ -14,23 +14,23 @@ import application.models.Genero;
 import application.repositories.GeneroRepository;
 
 @Controller
-@RequestMapping("/genero")
+@RequestMapping("/generos")
 public class GeneroController {
     @Autowired
     private GeneroRepository generoRepo;
 
-    @RequestMapping("/list")
+    @RequestMapping("list")
     public String list(Model model) {
         model.addAttribute("generos", generoRepo.findAll());
         return "list.jsp"; 
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("insert")
     public String formInsert() {
         return "insert.jsp";
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "insert", method = RequestMethod.POST)
     public String saveInsert(@RequestParam("nome") String nome) {
         Genero genero = new Genero();
         genero.setNome(nome);
@@ -40,7 +40,7 @@ public class GeneroController {
         return "redirect:/genero/list";
     }
 
-    @RequestMapping("/update/{id}")
+    @RequestMapping("update/{id}")
     public String formUpdate(Model model, @PathVariable int id) {
         Optional<Genero> genero = generoRepo.findById(id);
         if(!genero.isPresent())
@@ -49,7 +49,7 @@ public class GeneroController {
         return "/genero/update.jsp";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
     public String saveUpdate(@RequestParam("nome") String nome, @RequestParam("id") int id) {
         Optional<Genero> genero = generoRepo.findById(id);
         if(!genero.isPresent())
@@ -61,7 +61,7 @@ public class GeneroController {
         return "redirect:/genero/list";
     }
 
-    @RequestMapping("/delete/{id}")
+    @RequestMapping("delete/{id}")
     public String formDelete(Model model, @PathVariable int id) {
         Optional<Genero> genero = generoRepo.findById(id);
         if(!genero.isPresent())
@@ -70,7 +70,7 @@ public class GeneroController {
         return "/genero/delete.jsp";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String confirmDelete(@RequestParam("id") int id) {
         generoRepo.deleteById(id);
         return "redirect:/genero/list";
